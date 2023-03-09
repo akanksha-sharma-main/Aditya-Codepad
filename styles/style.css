@@ -1,0 +1,14 @@
+.borderRadius {
+    border-radius: 6px;
+}
+
+.roundedCircle {
+    border-radius: 100%;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.player-title {
+    font-weight: 750;
+}
