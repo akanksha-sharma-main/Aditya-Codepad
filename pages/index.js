@@ -1,94 +1,133 @@
-import Link from 'next/link'
-import { useState } from "react";
-import Movie from "../models/Movies";
-import mongoose from 'mongoose';
-import Linkify from "react-linkify"
-import { Typography,Card, CardContent, Button,Grid } from "@mui/material";
+import React, { useState, useEffect } from "react";
+var showdown = require('showdown')
 
-export default function Index({ products }) {
-  const [showFullDesc, setShowDesc] = useState(Array(products.length).fill(false))
-  
-  const handleShowMoreClick = (index) => {
-    const updatedShowDesc = [...showFullDesc]
-    updatedShowDesc[index] = !updatedShowDesc[index]
-    setShowDesc(updatedShowDesc)
-  }
-  return (
-    <Grid container spacing={0}>
-      <Grid item xs={12} lg={12}>
-        <Grid container>
-          {products.map((blog, index) => (
-            <Grid
-              key={index}
-              item
-              xs={12}
-              lg={3}
-              sx={{
-                display: "flex",
-                alignItems: "stretch",
-              }}
-            >
-              <Card
-                sx={{
-                  p: 0,
-                  width: "100%",
-                }}
-              >
-                <img loading="lazy" className="w-full" src={blog.imageUrl} alt="img"></img>
-                <CardContent
-                  sx={{
-                    paddingLeft: "30px",
-                    paddingRight: "30px",
-                  }}
-                >
-                  <Typography
-                    sx={{
-                      fontSize: "h4.fontSize",
-                      fontWeight: "500",
-                    }}
-                  >
-                    {blog.title}
-                  </Typography>
-                  <Linkify componentDecorator={(decoratedHref, decoratedText, key) => (<a className="text-blue-800 font-medium" href={decoratedHref} key={key} target="_blank" rel="noopener noreferrer">{decoratedText}</a>)} hashtagDecorator={(decoratedText, key) => (<span key={key} className="text-blue-900 font-semibold">{decoratedText}</span>)} emailDecorator={(decoratedText, key) => (<a href={`mailto:${decoratedText}`} key={key} target="_blank" rel="noopener noreferrer">{decoratedText}</a>)}>
-                    <Typography
-                      color="textSecondary"
-                      sx={{
-                        fontSize: "14px",
-                        fontWeight: "400",
-                        mt: 1,
-                      }}
-                    >
-                      {showFullDesc[index] ? blog.desc : blog.desc.substring(0, 280)}{products[index].desc.length > 279 && <button className="ml-0.5 font-bold text-gray-800" onClick={() => { handleShowMoreClick(index) }}
-                      >{showFullDesc[index] ? `${" "}Show less...` : `${" "}Show more...`}
-                      </button>}
-                    </Typography>
-                  </Linkify>
-                  <Link target="_blank" href={blog.videoUrl}><Button
-                    variant="contained"
-                    sx={{
-                      mt: "15px",
-                    }}
-                    color={blog.btncolor}
-                  >
-                    View
-                  </Button></Link>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      </Grid>
-    </Grid>
-  );
+
+const Index = ({ fileData }) => {
+    function renderFileList(files) {
+        // Group files by name
+        const filesByName = files.reduce((acc, file) => {
+          if (!acc[file.name]) {
+            acc[file.name] = [];
+          }
+          acc[file.name].push(file);
+          return acc;
+        }, {});
+      
+        // Render file list
+        return files.map((file, index) => {
+          if (file.dir) {
+            const firstLines = filesByName[file.name].map(file => file.first_line);
+            return (
+              <li key={index} className="nav-item is-current-page is-active" data-depth="1">
+                <a className="nav-link nav-item-toggle">{file.name}</a>
+                <ul className="nav-list">
+                  {firstLines.map((line, i) => (
+                    <li key={i} className="nav-item " data-depth="2">
+                      <a className="nav-link">{line}</a>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            );
+          } else {
+            return (
+              <li key={index} className="nav-item" data-depth="1">
+                <a className="nav-link nav-item-toggle">{file.name}</a>
+              </li>
+            );
+          }
+        });
+      }
+      
+    return (
+        <div className="body">
+            <div className="nav-container" data-component="cypher-manual" data-version="5">
+                <aside className="nav">
+                    <div className="panels">
+                        <div className="nav-panel-menu is-active" data-panel="menu">
+                            <nav className="nav-menu">
+                                <ul className="nav-list">
+                                    <li className="nav-item " data-depth="0">
+                                        <ul className="nav-list">
+                                                {renderFileList(fileData.data)}
+                                            {/* {fileData.data.map((file, index) => (
+                                                <li key={index} className="nav-item" data-depth="1">
+                                                <a className="nav-link nav-item-toggle">{file.first_line.split('#')[1]}</a>
+                                                <ul className="nav-list">
+                                                    <li className="nav-item" data-depth="2">
+                                                        <a className="nav-link" href="introduction/neo4j-databases-graphs/">Neo4j databases and graphs</a>
+                                                    </li>
+                                                    <li className="nav-item" data-depth="2">
+                                                        <a className="nav-link" href="introduction/querying-updating-administering/">Querying, updating and administering</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            ))} */}
+                                            {/* <li className="nav-item" data-depth="1">
+                                                <a className="nav-link" href="./">The Neo4j Cypher Manual v5</a>
+                                            </li>
+                                            <li className="nav-item" data-depth="1">
+                                                <a className="nav-link nav-item-toggle" href="introduction/">Introduction</a>
+                                                <ul className="nav-list">
+                                                    <li className="nav-item" data-depth="2">
+                                                        <a className="nav-link" href="introduction/neo4j-databases-graphs/">Neo4j databases and graphs</a>
+                                                    </li>
+                                                    <li className="nav-item" data-depth="2">
+                                                        <a className="nav-link" href="introduction/querying-updating-administering/">Querying, updating and administering</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li className="nav-item is-current-page is-active" data-depth="1">
+                                                <a className="nav-link nav-item-toggle" href="syntax/">Syntax</a>
+                                                <ul className="nav-list">
+                                                    <li className="nav-item" data-depth="2">
+                                                        <a className="nav-link" href="syntax/values/">Values and types</a>
+                                                    </li>
+                                                </ul>
+                                            </li> */}
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+            <main className="article">
+                <div className="toolbar" role="navigation">
+                    <div className="toolbar-wrapper">
+                        <button className="nav-toggle" aria-label="Toggle Table of Contents"></button>
+                        <a href="./" className="home-link is-current" aria-label="Go to home page"></a>
+                        <nav className="breadcrumbs" aria-label="breadcrumbs">
+                            <ul>
+                                <li><a href="./">Cypher Manual</a></li>
+                                <li><a href="./">
+                                    The Neo4j Cypher Manual v5
+                                </a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+
+                <div className="content">
+                    <article className="doc">
+
+                    </article>
+                </div>
+            </main>
+        </div>
+    )
 }
 
+export default Index
 
-export async function getServerSideProps(context) {
-  if (!mongoose.connections[0].readyState) {
-    await mongoose.connect(process.env.MONGO_URI)
-  }
-  let movie = await Movie.find()
-  return {
-    props: { products: JSON.parse(JSON.stringify(movie)) },
-  }
-}
+export async function getStaticProps() {
+    const res = await fetch('http://localhost:3001');
+    const data = await res.json();
+
+    return {
+        props: {
+            fileData: { data }
+        }
+    }
+}  
