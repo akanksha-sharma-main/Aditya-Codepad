@@ -1,0 +1,143 @@
+function renderFileList(files) {
+        // Group files by name
+        const filesByName = files.reduce((acc, file) => {
+          if (!acc[file.name]) {
+            acc[file.name] = [];
+          }
+          acc[file.name].push(file);
+          return acc;
+        }, {});
+      
+        // Render file list
+        return files.map((file, index) => {
+          if (file.dir) {
+            const firstLines = filesByName[file.name].map(file => file.first_line);
+            return (
+              <li key={index} className="nav-item is-current-page is-active" data-depth="1">
+                <a className="nav-link nav-item-toggle">{file.name}</a>
+                <ul className="nav-list">
+                  {firstLines.map((line, i) => (
+                    <li key={i} className="nav-item " data-depth="2">
+                      <a className="nav-link">{line}</a>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            );
+          } else {
+            return (
+              <li key={index} className="nav-item" data-depth="1">
+                <a className="nav-link nav-item-toggle">{file.name}</a>
+              </li>
+            );
+          }
+        });
+      }
+
+
+
+      function renderFiles(files) {
+        const groupedFiles = files.reduce((acc, file) => {
+          const name = file.name.split('.')[0]; // get the name without the extension
+          if (file.dir) {
+            if (!acc[name]) {
+              acc[name] = { dir: file, files: [] };
+            } else {
+              acc[name].dir = file;
+            }
+          } else if (acc[name]) {
+            acc[name].files.push(file);
+          } else {
+            acc[name] = { dir: null, files: [file] };
+          }
+          console.log(acc)
+          return acc;
+        }, {});
+      
+        return Object.entries(groupedFiles).map(([name, { dir, files }]) => (
+          <li key={name} className="nav-item is-current-page is-active" data-depth="1">
+            <a className="nav-link nav-item-toggle">{name}</a>
+            {dir && (
+              <ul className="nav-list">
+                {files.map((file) => (
+                  <li key={file.path} className="nav-item" data-depth="2">
+                    <a className="nav-link">{file.first_line}</a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ));
+      }
+
+
+
+
+      const renderNavItems = (files) => {
+        const items = [];
+
+        // Create a map to group files by name
+        const fileGroups = new Map();
+        files.forEach((file) => {
+            if (file.dir) return; // Ignore directories
+            const groupName = file.name;
+            if (!fileGroups.has(groupName)) {
+                fileGroups.set(groupName, []);
+            }
+            fileGroups.get(groupName).push(file);
+        });
+
+        // Loop through file groups and create list items
+        fileGroups.forEach((groupFiles, groupName) => {
+            const allFirstLines = groupFiles.map((file) => file.first_line);
+            const hasSubItems = groupFiles.length > 1;
+
+            const item = (
+                <li key={groupName} className="nav-item is-active" data-depth="1">
+                    <a className="nav-link nav-item-toggle">{groupName}</a>
+                    {hasSubItems && (
+                        <ul className="nav-list">
+                            {groupFiles.map((file, index) => (
+                                <li key={`${groupName}-${index}`} className="nav-item" data-depth="2">
+                                    <a className="nav-link">{file.first_line}</a>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </li>
+            );
+
+            items.push(item);
+        });
+
+        return items;
+    };
+    function renderFiles(files) {
+        const groupedFiles = files.reduce((acc, file) => {
+            const name = file.name.split('.')[0]; // get the name without the extension
+            if (file.dir) {
+                if (!acc[name]) {
+                    acc[name] = { dir: file, files: [] };
+                } else {
+                    acc[name].dir = file;
+                }
+            } else if (acc[name]) {
+                acc[name].files.push(file);
+            } else {
+                acc[name] = { dir: null, files: [file] };
+            }
+            return acc;
+        }, {});
+        return Object.entries(groupedFiles).map(([name, { dir, files }]) => (
+            <li key={name} className="nav-item  is-active" data-depth="1">
+                <a className="nav-link nav-item-toggle">{name}</a>
+                {dir && (
+                    <ul className="nav-list">
+                        {files.map((file) => {
+                            renderNavItems(file)
+                        })}
+                    </ul>
+                )}
+            </li>
+        ));
+    }
