@@ -13,11 +13,12 @@ const Index = ({ fileData }) => {
     const [firstLine, setfirstLine] = useState(fileData.data[0].first_line)
     const filePathSplit = filePath.split("\\")
     const [mykey, setMyKey] = useState(Math.random())
-    const url = `http://localhost:3001/file?path=${filePath}`
+    const url = `https://akankshasharmamain.pythonanywhere.com/file?path=${filePath}`
+  console.log(url)
     const fetchData = (path) => {
-        axios.post(url,)
+        axios.post(url)
             .then(response => {
-                setData(response.data.content);
+           console.log(response); setData(response.data.content);
             })
             .catch(error => {
                 console.log(error);
@@ -163,7 +164,7 @@ const Index = ({ fileData }) => {
 export default Index
 
 export async function getStaticProps() {
-    const res = await fetch(`${process.env.FLASK_API}`);
+    const res = await fetch(`http://akankshasharmamain.pythonanywhere.com`);
     const data = await res.json();
 
     return {
