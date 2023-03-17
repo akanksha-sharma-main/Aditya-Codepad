@@ -11,13 +11,13 @@ const Index = ({ fileData }) => {
     const [data, setData] = useState()
     const [filePath, setfilePath] = useState(fileData.data[0].path)
     const [firstLine, setfirstLine] = useState(fileData.data[0].first_line)
-    const filePathSplit = filePath.split("\\")
+    const filePathSplit = filePath.split("/")
     const [mykey, setMyKey] = useState(Math.random())
     const url = `https://akankshasharmamain.pythonanywhere.com/file?path=${filePath}`
     const fetchData = (path) => {
         axios.post(url)
-            .then(response => {
-           console.log(response); setData(response.data.content);
+            .then(response => {setData(response.data.content);
+                               console.log(response);
             })
             .catch(error => {
                 console.log(error);
