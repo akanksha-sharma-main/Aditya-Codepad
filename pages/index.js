@@ -14,7 +14,6 @@ const Index = ({ fileData }) => {
     const filePathSplit = filePath.split("\\")
     const [mykey, setMyKey] = useState(Math.random())
     const url = `https://akankshasharmamain.pythonanywhere.com/file?path=${filePath}`
-  console.log(url)
     const fetchData = (path) => {
         axios.post(url)
             .then(response => {
