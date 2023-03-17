@@ -1,42 +1,55 @@
-import React, { useState, useEffect, useRef } from "react";
-var showdown = require('showdown')
-import FeatherIcon from 'feather-icons-react'
+import React, { useState, useEffect } from "react";
+import FeatherIcon from 'feather-icons-react';
 import axios from 'axios';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/default.css';
+import { useRouter } from 'next/router'
+import DOMPurify from 'dompurify'
 
 const Index = ({ fileData }) => {
-    const activeItemRef = useRef(null);
+    const [nav, setnav] = useState('not-active')
     const [data, setData] = useState()
     const [filePath, setfilePath] = useState(fileData.data[0].path)
     const [firstLine, setfirstLine] = useState(fileData.data[0].first_line)
     const filePathSplit = filePath.split("\\")
     const [mykey, setMyKey] = useState(Math.random())
+    const url = `http://localhost:3001/file?path=${filePath}`
     const fetchData = (path) => {
-        fetch(`api/fetchContent/?path=${path}`, { method: 'POST' })
-            .then(response => response.json())
-            .then(data => setData(data))
-            .catch(err => console.error(err));
+        axios.post(url,)
+            .then(response => {
+                setData(response.data.content);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        const codeElements = document.querySelectorAll('code');
+        codeElements.forEach((code) => {
+            hljs.highlightBlock(code);
+            setMyKey(Math.random())
+        });
     }
-    useEffect(() => {
-        fetchData(filePath)
-        const handleItemClick = (event) => {
-            const clickedItem = event.target.closest("li");
-            if (clickedItem && clickedItem.parentNode === activeItemRef.current) {
-              const activeItem = activeItemRef.current.querySelector(".is-active");
-              if (activeItem) {
-                activeItem.classList.remove("is-active");
-              }
-              clickedItem.classList.add("is-active");
-            }
-          };
-          document.addEventListener("click", handleItemClick);
-          return () => {
-            document.removeEventListener("click", handleItemClick);
-          };
+    const router = useRouter()
+    useEffect(async () => {
+        axios.post(url,)
+            .then(response => {
+                setData(response.data.content);
+                const codeElements = document.querySelectorAll('code');
+                codeElements.forEach((code) => {
+                    hljs.highlightBlock(code);
+                    setMyKey(Math.random())
+                });
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        const codeElements = await document.querySelectorAll('code');
+        codeElements.forEach(async (code) => {
+            await hljs.highlightBlock(code);
+            await setMyKey(Math.random())
+        });
+
     }, [])
 
-  const handleItemClick = (index) => {
-    setIsActive(index);
-  };
     function renderFileList(files) {
         // Group files by name
         const filesByName = files.reduce((acc, file) => {
@@ -65,7 +78,7 @@ const Index = ({ fileData }) => {
                         <ul className="nav-list cursor-pointer">
                             {firstLines.file.map((line, i) => (
                                 <li key={i} onClick={() => {
-                                    setfilePath(firstLines.path[i]); setfirstLine(line)
+                                    setfilePath(firstLines.path[i]); setfirstLine(line); fetchData(filePath)
                                 }} className="nav-item" data-depth="2">
                                     <a className="nav-link">{line}</a>
                                 </li>
@@ -75,8 +88,16 @@ const Index = ({ fileData }) => {
                 );
             } else {
                 return (
-                    <li ref={activeItemRef} onClick={() => {
-                        setfilePath(file.path);setfirstLine(file.first_line);setMyKey(Math.random());fetchData(filePath)
+                    <li onClick={async () => {
+                        await setfirstLine(file.first_line);
+                        await setfilePath(file.path);
+                        await fetchData(file.path);
+                        const codeElements = document.querySelectorAll('code');
+                        codeElements.forEach((code) => {
+                            hljs.highlightBlock(code);
+                            setMyKey(Math.random())
+                        });
+                        await setMyKey(Math.random());
                     }} key={index} className={`nav-item is-current-page`} data-depth="1">
                         <a className="nav-link nav-item-toggle">{file.name}</a>
                     </li>
@@ -86,10 +107,11 @@ const Index = ({ fileData }) => {
     }
 
 
-    
+
     return (
         <div className="body">
-            <div className="nav-container" data-component="cypher-manual" data-version="5">
+
+            <div className={`nav-container ${nav}`} data-component="cypher-manual" data-version="5">
                 <aside className="nav">
                     <div className="panels">
                         <div className="nav-panel-menu is-active" data-panel="menu">
@@ -107,9 +129,16 @@ const Index = ({ fileData }) => {
                 </aside>
             </div>
             <main className="article">
+
                 <div className="toolbar" role="navigation">
                     <div className="toolbar-wrapper">
-                        <button className="nav-toggle" aria-label="Toggle Table of Contents"></button>
+                        <button onClick={()=>{
+                            if(nav === "is-active"){
+                                setnav("not-active")
+                            } else {
+                                setnav("is-active")
+                            }
+                        }} className="nav-toggle"  aria-label="Toggle Table of Contents"></button>
                         <a href="/" className="home-link is-current" aria-label="Go to home page"></a>
                         <nav className="breadcrumbs cursor-default" aria-label="breadcrumbs">
                             <ul>
@@ -123,7 +152,7 @@ const Index = ({ fileData }) => {
 
                 <div className="content mt-5">
                     <article key={mykey} className="doc">
-                       {data && <div dangerouslySetInnerHTML={{__html: data.content}}></div>}
+                        {data && <div key={mykey} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(data) }}></div>}
                     </article>
                 </div>
             </main>
@@ -134,7 +163,7 @@ const Index = ({ fileData }) => {
 export default Index
 
 export async function getStaticProps() {
-    const res = await fetch('http://localhost:3001');
+    const res = await fetch(`${process.env.FLASK_API}`);
     const data = await res.json();
 
     return {

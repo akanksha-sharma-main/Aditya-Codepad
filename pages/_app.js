@@ -11,11 +11,17 @@ export default function MyApp(props) {
   const [progress, setProgress] = useState(0)
   const [user, setUser] = useState({ value: null })
   const [key, setKey] = useState()
+  const [mykey, setMyKey] = useState()
   const { Component, pageProps } = props;
   useEffect(() => {
     router.events.on('routeChangeStart', () => { setProgress(40) });
     router.events.on('routeChangeComplete', () => { setProgress(100) });
     setKey(Math.random())
+    const codeElements = document.querySelectorAll('code');
+                codeElements.forEach((code) => {
+                    hljs.highlightBlock(code);
+                    setMyKey(Math.random())
+                });
   }, [router.query])
   return (
     <>
@@ -25,10 +31,13 @@ export default function MyApp(props) {
         onLoaderFinished={() => setProgress(0)}
       />
       <Head>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css"/>
         <title>Personal Python Docs</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+        <script src="site.js"></script>
       </Head>
       <Navbar/>
-      <Component {...pageProps} /></>
+      <Component key={mykey} {...pageProps} /></>
   );
 }

@@ -6,7 +6,7 @@ const Navbar = () => {
         <div className="navbar-brand">
           <a className="navbar-item" href="/">
     
-          <img className="navbar-logo" src="https://dist.neo4j.com/wp-content/uploads/20210422142941/neo4j-logo-2020.svg" alt="Neo4j Docs"/>
+          <img className="navbar-logo" src="https://th.bing.com/th/id/R.60a2750039f7273f41bcb4ada00e761a?rik=7GGJS2p2OOPhhg&riu=http%3a%2f%2fclipart-library.com%2fimages_k%2fpython-logo-transparent%2fpython-logo-transparent-22.png&ehk=FnvntKvfA2g8Wai00iqiTH%2fu2DEdtPpgV0ejxYLoZpI%3d&risl=&pid=ImgRaw&r=0" alt="Neo4j Docs"/>
           </a>
     
           </div>
