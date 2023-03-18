@@ -3,25 +3,21 @@ import FeatherIcon from 'feather-icons-react';
 import axios from 'axios';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/default.css';
-import { useRouter } from 'next/router';
-import DOMPurify from 'dompurify';
+import { useRouter } from 'next/router'
+import DOMPurify from 'dompurify'
 
-const Index = ({ fileData, loadfull, loadhalf }) => {
-    // const fileData = fileDatas.data.map(i => fileDatas.data[i]).sort((a, b) => {
-    //     return fileDatas.data.ind.indexOf(fileDatas.data.indexOf(a)) - fileDatas.data.ind.indexOf(items.indexOf(b));
-    // });
+const Index = ({ fileData }) => {
     const [nav, setnav] = useState('not-active')
     const [data, setData] = useState()
     const [filePath, setfilePath] = useState(fileData.data[0].path)
     const [firstLine, setfirstLine] = useState(fileData.data[0].first_line)
     const filePathSplit = filePath.split("\\")
     const [mykey, setMyKey] = useState(Math.random())
+    const url = `http://akankshasharmamain.pythonanywhere.com/file?path=${filePath}`
     const fetchData = (path) => {
-        loadhalf();
-        axios.post(`http://localhost:3001/file?path=${path}`)
-            .then(async(response) => {
-                await setData(response.data.content);
-                await loadfull();
+        axios.post(url,)
+            .then(response => {
+                setData(response.data.content);
             })
             .catch(error => {
                 console.log(error);
@@ -34,7 +30,18 @@ const Index = ({ fileData, loadfull, loadhalf }) => {
     }
     const router = useRouter()
     useEffect(async () => {
-        fetchData(filePath)
+        axios.post(url,)
+            .then(response => {
+                setData(response.data.content);
+                const codeElements = document.querySelectorAll('code');
+                codeElements.forEach((code) => {
+                    hljs.highlightBlock(code);
+                    setMyKey(Math.random())
+                });
+            })
+            .catch(error => {
+                console.log(error);
+            });
         const codeElements = await document.querySelectorAll('code');
         codeElements.forEach(async (code) => {
             await hljs.highlightBlock(code);
@@ -42,16 +49,7 @@ const Index = ({ fileData, loadfull, loadhalf }) => {
         });
 
     }, [])
-    const getfirstline = (firstline) => {
-        let splitwords = firstline.split('#')
-        if(splitwords[1]=='') {
-            return splitwords[2]
-        }else if(splitwords[0]==''){
-            return splitwords[1]
-        } else {
-            return firstline
-        }
-    }
+
     function renderFileList(files) {
         // Group files by name
         const filesByName = files.reduce((acc, file) => {
@@ -61,14 +59,9 @@ const Index = ({ fileData, loadfull, loadhalf }) => {
             acc[file.name].push(file);
             return acc;
         }, {});
-        //         const filteredData = data.filter((item, index, self) =>
-        //   index === self.findIndex((t) => (
-        //     t.name === item.name
-        //   ))
-        // );
+
         // Render file list
         return files.map((file, index) => {
-
             const [isActive, setIsActive] = useState(Array(fileData.length).fill(false))
 
             const handleShowMoreClick = (index) => {
@@ -77,21 +70,17 @@ const Index = ({ fileData, loadfull, loadhalf }) => {
                 setIsActive(updatedShowMore)
             }
             if (file.dir) {
-
                 const firstLines = { file: filesByName[file.name].map(file => file.first_line), path: filesByName[file.name].map(file => file.path) }
                 return (
-
                     <li key={index} className={`nav-item is-current-page ${isActive[index] ? 'is-active' : ''}`} data-depth="1">
                         <FeatherIcon icon={`chevron-${isActive[index] ? 'down' : 'right'}`} className={`absolute z-50 mt-1 right-2`} width="15px" />
                         <a onClick={() => { handleShowMoreClick(index) }} className="nav-link nav-item-toggle">{file.name}</a>
                         <ul className="nav-list cursor-pointer">
                             {firstLines.file.map((line, i) => (
-
                                 <li key={i} onClick={() => {
-                        loadhalf();setfilePath(firstLines.path[i]); setfirstLine(line); fetchData(firstLines.path[i])
+                                    setfilePath(firstLines.path[i]); setfirstLine(line); fetchData(filePath)
                                 }} className="nav-item" data-depth="2">
-
-                                    <a className="nav-link">{getfirstline(line)}</a>
+                                    <a className="nav-link">{line}</a>
                                 </li>
                             ))}
                         </ul>
@@ -100,7 +89,6 @@ const Index = ({ fileData, loadfull, loadhalf }) => {
             } else {
                 return (
                     <li onClick={async () => {
-                        await loadhalf();
                         await setfirstLine(file.first_line);
                         await setfilePath(file.path);
                         await fetchData(file.path);
@@ -111,8 +99,7 @@ const Index = ({ fileData, loadfull, loadhalf }) => {
                         });
                         await setMyKey(Math.random());
                     }} key={index} className={`nav-item is-current-page`} data-depth="1">
-
-                        <a className="nav-link nav-item-toggle">{getfirstline(file.first_line)}</a>
+                        <a className="nav-link nav-item-toggle">{file.name}</a>
                     </li>
                 );
             }
@@ -123,6 +110,7 @@ const Index = ({ fileData, loadfull, loadhalf }) => {
 
     return (
         <div className="body">
+
             <div className={`nav-container ${nav}`} data-component="cypher-manual" data-version="5">
                 <aside className="nav">
                     <div className="panels">
@@ -144,19 +132,19 @@ const Index = ({ fileData, loadfull, loadhalf }) => {
 
                 <div className="toolbar" role="navigation">
                     <div className="toolbar-wrapper">
-                        <button onClick={() => {
-                            if (nav === "is-active") {
+                        <button onClick={()=>{
+                            if(nav === "is-active"){
                                 setnav("not-active")
                             } else {
                                 setnav("is-active")
                             }
-                        }} className="nav-toggle" aria-label="Toggle Table of Contents"></button>
+                        }} className="nav-toggle"  aria-label="Toggle Table of Contents"></button>
                         <a href="/" className="home-link is-current" aria-label="Go to home page"></a>
                         <nav className="breadcrumbs cursor-default" aria-label="breadcrumbs">
                             <ul>
                                 <li><a>{filePathSplit[0]}</a></li>
                                 <li><a>{filePathSplit[1]}</a></li>
-                                <li><a>{getfirstline(firstLine)}</a></li>
+                                <li><a>{firstLine}</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -175,7 +163,7 @@ const Index = ({ fileData, loadfull, loadhalf }) => {
 export default Index
 
 export async function getStaticProps() {
-    const res = await fetch("http://localhost:3001");
+    const res = await fetch("http://akankshasharmamain.pythonanywhere.com");
     const data = await res.json();
 
     return {

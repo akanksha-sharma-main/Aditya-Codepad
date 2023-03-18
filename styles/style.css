@@ -2324,10 +2324,10 @@ body.cheat-sheet .navbar-brand .navbar-item:first-child a {
 
 @media screen and (min-width:1024px) {
 
-    body.cheat-sheet .navbar-end .navbar-link,
-    body.cheat-sheet .navbar-end .navbar-link:hover,
-    body.cheat-sheet .navbar-end>.navbar-item,
-    body.cheat-sheet .navbar-end>a.navbar-item:hover {
+    body .navbar-end .navbar-link,
+    body .navbar-end .navbar-link:hover,
+    body .navbar-end>.navbar-item,
+    body .navbar-end>a.navbar-item:hover {
         color: #718096
     }
 
@@ -2335,71 +2335,71 @@ body.cheat-sheet .navbar-brand .navbar-item:first-child a {
         border-color: #718096
     }
 
-    body.cheat-sheet .navbar-item.has-dropdown:hover .navbar-link {
+    body .navbar-item.has-dropdown:hover .navbar-link {
         color: #718096
     }
 }
 
-body.cheat-sheet .navbar-burger {
+body .navbar-burger {
     color: #718096
 }
 
-body.cheat-sheet .navbar-burger span {
+body .navbar-burger span {
     background: #718096
 }
 
-body.cheat-sheet .doc .button {
+body .doc .button {
     background: #3182ce;
     color: #fff
 }
 
-body.cheat-sheet .doc .button:hover {
+body .doc .button:hover {
     background: #4299e1;
     color: #fff
 }
 
-body.cheat-sheet .nav-item .nav-item::before,
-body.cheat-sheet .toc-menu li a::before {
+body .nav-item .nav-item::before,
+body .toc-menu li a::before {
     background-color: #90cdf4
 }
 
-body.cheat-sheet .tooltip,
-body.cheat-sheet .tooltip--top::after {
+body .tooltip,
+body .tooltip--top::after {
     border-bottom-color: #63b3ed
 }
 
-body.cheat-sheet .tooltip.tooltip--bottom::after {
+body .tooltip.tooltip--bottom::after {
     border-top-color: #63b3ed
 }
 
-body.cheat-sheet #preamble .abstract .title,
-body.cheat-sheet #preamble .abstract blockquote {
+body #preamble .abstract .title,
+body #preamble .abstract blockquote {
     border-left-color: #63b3ed;
     color: #2c5282
 }
 
-body.cheat-sheet .tableblock .icon i {
+body .tableblock .icon i {
     color: #3182ce
 }
 
-body.cheat-sheet .navbar .navbar-item.getting-started-cta .navbar-link {
+body .navbar .navbar-item.getting-started-cta .navbar-link {
     background: #018bff;
     color: #fff
 }
 
-body.cheat-sheet .navbar .navbar-item.getting-started-cta .navbar-link:hover {
+body .navbar .navbar-item.getting-started-cta .navbar-link:hover {
     background: #0070d9
 }
 
-body.cheat-sheet .navbar .navbar-item.getting-started-cta .navbar-link:active {
+body .navbar .navbar-item.getting-started-cta .navbar-link:active {
     background: #0056b3
 }
 
-body.cheat-sheet .navbar-brand {
+body .navbar-brand {
     width: 18rem
 }
 
-body.cheat-sheet .navbar-start {
+body .navbar-start {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -2413,15 +2413,15 @@ body.cheat-sheet .navbar-start {
     margin-right: 2rem
 }
 
-body.cheat-sheet .navbar-start .navbar-link {
+body .navbar-start .navbar-link {
     margin-left: auto
 }
 
-body.cheat-sheet .navbar-link a {
+body .navbar-link a {
     color: #3182ce
 }
 
-body.cheat-sheet .navbar-link a.external::after {
+body .navbar-link a.external::after {
     display: inline-block;
     content: "";
     height: 1rem;
@@ -2431,59 +2431,59 @@ body.cheat-sheet .navbar-link a.external::after {
     background-position: 50%
 }
 
-body.cheat-sheet .dropdown .dropdown-label {
+body .dropdown .dropdown-label {
     padding: .5rem 2rem .5rem .5rem
 }
 
-body.cheat-sheet .nav-panel-versions {
+body .nav-panel-versions {
     height: auto;
     padding: 0;
     border-left: 1px solid #e2e8f0
 }
 
-body.cheat-sheet .nav-panel-versions,
-body.cheat-sheet .nav-panel-versions .dropdown {
+body .nav-panel-versions,
+body .nav-panel-versions .dropdown {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex
 }
 
-body.cheat-sheet .nav-panel-types .dropdown {
+body .nav-panel-types .dropdown {
     width: 100%
 }
 
-body.cheat-sheet .nav-panel-types .dropdown .dropdown-label,
-body.cheat-sheet .nav-panel-versions .dropdown .dropdown-label {
+body .nav-panel-types .dropdown .dropdown-label,
+body .nav-panel-versions .dropdown .dropdown-label {
     display: block;
     white-space: nowrap;
     padding: .5rem 1rem
 }
 
-body.cheat-sheet .nav-panel-versions .dropdown .dropdown-styles {
+body .nav-panel-versions .dropdown .dropdown-styles {
     width: 50%;
     display: inline-block
 }
 
-body.cheat-sheet .nav-panel-types .dropdown .dropdown-styles {
+body .nav-panel-types .dropdown .dropdown-styles {
     display: inline-block;
     margin: 1rem;
     width: calc(100% - 4rem);
     background-color: rgb(#f7fafc)
 }
 
-body.cheat-sheet .content aside.toc.sidebar {
+body .content aside.toc.sidebar {
     display: none
 }
 
-body.cheat-sheet .nav-container {
+body .nav-container {
     border-right: none
 }
 
-body.cheat-sheet aside.nav {
+body aside.nav {
     background: #fff
 }
 
-body.cheat-sheet aside.nav .nav-panel-types {
+body aside.nav .nav-panel-types {
     position: sticky;
     top: 3.77778rem;
     z-index: 20;
@@ -2499,48 +2499,48 @@ body.cheat-sheet aside.nav .nav-panel-types {
     box-shadow: 0 1px 0 #edf2f7
 }
 
-body.cheat-sheet .toc-menu-placeholder h2 {
+body .toc-menu-placeholder h2 {
     display: none !important
 }
 
-body.cheat-sheet .toc .toc-menu ul {
+body .toc .toc-menu ul {
     margin-top: .5rem
 }
 
-body.cheat-sheet .toc .toc-menu li {
+body .toc .toc-menu li {
     padding-left: .5rem
 }
 
-body.cheat-sheet .toc .toc-menu li[data-level="2"] {
+body .toc .toc-menu li[data-level="2"] {
     padding-left: 2rem
 }
 
-body.cheat-sheet .toc .toc-menu li a {
+body .toc .toc-menu li a {
     border: none;
     padding: .5rem 1rem;
     margin: .5rem 0
 }
 
-body.cheat-sheet .toc .toc-menu li[data-level="1"] a {
+body .toc .toc-menu li[data-level="1"] a {
     font-weight: 600
 }
 
-body.cheat-sheet .toc .toc-menu li[data-level="2"] a {
+body .toc .toc-menu li[data-level="2"] a {
     padding: .25rem 1rem;
     margin: 0
 }
 
-body.cheat-sheet .toc .toc-menu a.is-active {
+body .toc .toc-menu a.is-active {
     color: #2b6cb0;
     background-color: #e6f8ff;
     border-radius: .5rem
 }
 
-body.cheat-sheet h1.page:first-child {
+body h1.page:first-child {
     display: none
 }
 
-body.cheat-sheet h2:not(.discrete) {
+body h2:not(.discrete) {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -2551,7 +2551,7 @@ body.cheat-sheet h2:not(.discrete) {
     border: none
 }
 
-body.cheat-sheet h3:not(.discrete) {
+body h3:not(.discrete) {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -2564,7 +2564,7 @@ body.cheat-sheet h3:not(.discrete) {
     padding-right: 0
 }
 
-body.cheat-sheet h3:not(.discrete) a {
+body h3:not(.discrete) a {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
@@ -2573,16 +2573,16 @@ body.cheat-sheet h3:not(.discrete) a {
     display: flex
 }
 
-body.cheat-sheet h3:not(.discrete) span.label {
+body h3:not(.discrete) span.label {
     margin-left: auto
 }
 
-body.cheat-sheet div.deprecated h2::after,
-body.cheat-sheet div.deprecated h3::after {
+body div.deprecated h2::after,
+body div.deprecated h3::after {
     display: none
 }
 
-body.cheat-sheet .sect2 {
+body .sect2 {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -2597,7 +2597,7 @@ body.cheat-sheet .sect2 {
     margin-bottom: 1rem
 }
 
-body.cheat-sheet h3 {
+body h3 {
     -webkit-box-flex: 100%;
     -ms-flex: 100%;
     flex: 100%;
@@ -2605,12 +2605,12 @@ body.cheat-sheet h3 {
     padding: 1rem
 }
 
-body.cheat-sheet .exampleblock {
+body .exampleblock {
     width: 100%;
     margin-bottom: 0
 }
 
-body.cheat-sheet .exampleblock>.content {
+body .exampleblock>.content {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -2622,7 +2622,7 @@ body.cheat-sheet .exampleblock>.content {
     border: none
 }
 
-body.cheat-sheet .listingblock {
+body .listingblock {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 42%;
     flex: 0 0 42%;
@@ -2631,16 +2631,16 @@ body.cheat-sheet .listingblock {
     border-top: 1px solid #e2e8f0
 }
 
-body.cheat-sheet .listingblock .content {
+body .listingblock .content {
     border-radius: .5rem
 }
 
-body.cheat-sheet .paragraph {
+body .paragraph {
     margin: 0 0 .5rem
 }
 
-body.cheat-sheet .description,
-body.cheat-sheet .openblock {
+body .description,
+body .openblock {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 42%;
     flex: 0 0 42%;
@@ -2652,14 +2652,14 @@ body.cheat-sheet .openblock {
     border-top: 1px solid #e2e8f0
 }
 
-body.cheat-sheet .description ul {
+body .description ul {
     list-style: circle;
     line-height: 1.25;
     margin: 0;
     padding: 0 1rem
 }
 
-body.cheat-sheet .page-labels {
+body .page-labels {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -2674,11 +2674,11 @@ body.cheat-sheet .page-labels {
     align-items: center
 }
 
-body.cheat-sheet .page-labels:first-of-type {
+body .page-labels:first-of-type {
     margin: 0 0 0 auto
 }
 
-body.cheat-sheet .page-labels p {
+body .page-labels p {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -ms-flex-direction: row;
@@ -2688,13 +2688,13 @@ body.cheat-sheet .page-labels p {
     display: flex
 }
 
-body.cheat-sheet .labels {
+body .labels {
     padding: 1rem 0;
     margin: 0;
     border-top: 1px solid #e2e8f0
 }
 
-body.cheat-sheet .label {
+body .label {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -2702,41 +2702,41 @@ body.cheat-sheet .label {
     line-height: 1.8
 }
 
-body.cheat-sheet .notes {
+body .notes {
     -webkit-box-flex: 100%;
     -ms-flex: 100%;
     flex: 100%;
     margin: 1rem .5rem
 }
 
-body.cheat-sheet .notes p {
+body .notes p {
     margin: 0;
     padding: .5rem
 }
 
-body.cheat-sheet pre.highlight {
+body pre.highlight {
     white-space: pre-wrap
 }
 
 .toc-menu li.hidden,
-body.cheat-sheet .description.hidden,
-body.cheat-sheet .exampleblock.hidden,
-body.cheat-sheet .labels.hidden,
-body.cheat-sheet .listingblock.hidden,
-body.cheat-sheet .sect1.hidden,
-body.cheat-sheet .sect2.hidden,
-body.cheat-sheet span.label.hidden {
+body .description.hidden,
+body .exampleblock.hidden,
+body .labels.hidden,
+body .listingblock.hidden,
+body .sect1.hidden,
+body .sect2.hidden,
+body span.label.hidden {
     display: none
 }
 
 @media screen and (max-width:1023px) {
-    body.cheat-sheet .toc-menu-placeholder h2 {
+    body .toc-menu-placeholder h2 {
         display: block;
         margin: 0 1.5rem;
         padding: 0
     }
 
-    body.cheat-sheet .toc-menu-placeholder ul {
+    body .toc-menu-placeholder ul {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
@@ -2746,32 +2746,32 @@ body.cheat-sheet span.label.hidden {
         list-style: none
     }
 
-    body.cheat-sheet .toc-menu-placeholder li {
+    body .toc-menu-placeholder li {
         margin: .25rem
     }
 
-    body.cheat-sheet .toc-menu-placeholder li[data-level="1"] {
+    body .toc-menu-placeholder li[data-level="1"] {
         border-bottom: 1px dotted #90cdf4;
         width: 100%;
         margin-top: .5rem
     }
 
-    body.cheat-sheet .toc-menu-placeholder li[data-level="2"] {
+    body .toc-menu-placeholder li[data-level="2"] {
         border: 1px solid #e2e8f0;
         font-size: .75556rem
     }
 
-    body.cheat-sheet .toc-menu-placeholder li a {
+    body .toc-menu-placeholder li a {
         display: block;
         padding: 0 .5rem
     }
 
-    body.cheat-sheet .sect2 {
+    body .sect2 {
         background: none;
         padding: 0
     }
 
-    body.cheat-sheet h3:not(.discrete) {
+    body h3:not(.discrete) {
         background: #edf2f7;
         margin: 0 .5rem;
         -webkit-box-flex: 1;
@@ -2780,7 +2780,7 @@ body.cheat-sheet span.label.hidden {
         border: 1px solid #e2e8f0
     }
 
-    body.cheat-sheet .sect2>div {
+    body .sect2>div {
         -webkit-box-flex: 0;
         -ms-flex: 0 0 80%;
         flex: 0 0 80%;
@@ -2794,18 +2794,18 @@ body.cheat-sheet span.label.hidden {
         border-radius: 0
     }
 
-    body.cheat-sheet .notes p {
+    body .notes p {
         background: none
     }
 
-    body.cheat-sheet .sect2>div.labels,
-    body.cheat-sheet .sect2>div.page-labels {
+    body .sect2>div.labels,
+    body .sect2>div.page-labels {
         -webkit-box-flex: 0;
         -ms-flex: 0 0 auto;
         flex: 0 0 auto
     }
 
-    body.cheat-sheet .sect2>div.labels p {
+    body .sect2>div.labels p {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
@@ -2815,41 +2815,44 @@ body.cheat-sheet span.label.hidden {
         flex-direction: row
     }
 
-    body.cheat-sheet .sect2>div.page-labels {
+    body .sect2>div.page-labels {
         border-left: none;
         margin-left: -.5rem
     }
 
-    body.cheat-sheet .sect2>div.listingblock {
+    body .sect2>div.listingblock {
         margin-top: 1rem;
         border-top: none
     }
 
-    body.cheat-sheet .sect2>div.description {
+    body .sect2>div.description {
         border-top: none;
         padding: .5rem 1rem
     }
 }
-
+.navbar-search .search-button svg{
+    display: none;
+}
 @media print {
 
-    body.cheat-sheet .feedback,
-    body.cheat-sheet .navbar-burger,
-    body.cheat-sheet .navbar-menu,
-    body.cheat-sheet .navbar-search,
-    body.cheat-sheet aside.toc.embedded,
-    body.cheat-sheet footer {
+    body .feedback,
+    body .navbar-burger,
+    body .navbar-menu,
+    body .navbar-search,
+    body aside.toc.embedded,
+    body footer {
         display: none
+        
     }
 
-    body.cheat-sheet .sect1 {
+    body .sect1 {
         page-break-after: always
     }
 
-    body.cheat-sheet .sect2,
-    body.cheat-sheet .sect2>div.description,
-    body.cheat-sheet .sect2>div.listingblock,
-    body.cheat-sheet .sect2>div.notes {
+    body .sect2,
+    body .sect2>div.description,
+    body .sect2>div.listingblock,
+    body .sect2>div.notes {
         page-break-inside: avoid
     }
 }
@@ -2955,12 +2958,11 @@ body {
     top: 0;
     width: 100%;
     word-wrap: break-word;
-    border-top: 4px solid #edf2f7;
     border-bottom: 1px solid #e2e8f0;
     z-index: 5000;
     display: flex;
     background: #fff;
-    border-top-color: #63b3ed;
+    /* border-top-color: #63b3ed; */
     color: #718096;
 }
 
@@ -3533,6 +3535,15 @@ body {
     color: #718096;
     font-size: 13px;
     font-weight: 400
+}
+
+.getting-started-cta .aura-ticker-l {
+    font-size: .8rem;
+    border: 1px solid #747474;
+    color: #747474;
+    border-radius: 9999px;
+    padding: 0 8px;
+    margin-left: 4px
 }
 
 .getting-started-cta .aura-ticker {

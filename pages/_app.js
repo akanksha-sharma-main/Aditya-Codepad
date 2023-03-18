@@ -6,6 +6,7 @@ import "../styles/style.css";
 import LoadingBar from 'react-top-loading-bar'
 import Navbar from "../assets/navbar";
 
+
 export default function MyApp(props) {
   const router = useRouter()
   const [progress, setProgress] = useState(0)
@@ -23,6 +24,12 @@ export default function MyApp(props) {
                     setMyKey(Math.random())
                 });
   }, [router.query])
+  const loadhalf = () =>{
+    setProgress(40)
+  }
+  const loadfull = () => {
+    setProgress(100)
+  } 
   return (
     <>
       <LoadingBar
@@ -38,6 +45,6 @@ export default function MyApp(props) {
         <script src="site.js"></script>
       </Head>
       <Navbar/>
-      <Component key={mykey} {...pageProps} /></>
+      <Component loadhalf={loadhalf} loadfull={loadfull} key={mykey} {...pageProps} /></>
   );
 }
