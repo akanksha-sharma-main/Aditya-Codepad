@@ -140,6 +140,7 @@ function reloadList(){
       <Head>
         <title>Personal Python Docs</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
+        <script src="site.js"></script>
       </Head>
       <Navbar />
       <div className="body">
