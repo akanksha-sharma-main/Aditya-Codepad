@@ -1,4 +1,5 @@
 import DOMPurify from 'dompurify';
+import React from 'react'
 
 const Index = (data) => {
     return (
