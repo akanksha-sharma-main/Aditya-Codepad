@@ -7,7 +7,6 @@ const Index = (data) => {
                 {data.data && <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(data.data) }}></div>}
             </article>
         </div>
-        )
+    )
 }
-
 export default Index
