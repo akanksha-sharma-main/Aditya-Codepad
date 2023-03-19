@@ -42,7 +42,7 @@ export default function MyApp(props) {
   const [mykey, setMyKey] = useState(Math.random())
   const fetchData = (path) => {
     loadhalf();
-    axios.post(`http://akankshasharmamain.pythonanywhere.com/file?path=${path}`)
+    axios.post(`https://akankshasharmamain.pythonanywhere.com/file?path=${path}`)
       .then(async (response) => {
         await setData(response.data.content);
         await loadfull();
@@ -53,19 +53,19 @@ export default function MyApp(props) {
   }
 
 function reloadList(){
-  fetch('http://akankshasharmamain.pythonanywhere.com/generate')
+  fetch('https://akankshasharmamain.pythonanywhere.com/generate')
       .then(response => response.json())
       .then(data => { setDirectoriesAndFiles(data.directoriesAndFile); })
-    fetch('http://akankshasharmamain.pythonanywhere.com/dirfiles')
+    fetch('https://akankshasharmamain.pythonanywhere.com/dirfiles')
       .then(response => response.json())
       .then(data => { setfiles(data); setlistKey(Math.random())})
 }
   useEffect(() => {
     fetchData(filePath)
-    fetch('http://akankshasharmamain.pythonanywhere.com/generate')
+    fetch('https://akankshasharmamain.pythonanywhere.com/generate')
       .then(response => response.json())
       .then(data => { setDirectoriesAndFiles(data.directoriesAndFile); })
-    fetch('http://akankshasharmamain.pythonanywhere.com/dirfiles')
+    fetch('https://akankshasharmamain.pythonanywhere.com/dirfiles')
       .then(response => response.json())
       .then(data => { setfiles(data) })
   }, [])
@@ -117,7 +117,7 @@ function reloadList(){
         loadhalf(); setfilePath(myfile.filelocation); setfirstLine(myfile.firstline); fetchData(myfile.filelocation)
       }} key={myfile.filename} className={`nav-item is-current-page`} data-depth="1">
         <a className="nav-link nav-item-toggle">{myfile.filename}</a>
-        <FeatherIcon onClick={()=>{fetch('http://akankshasharmamain.pythonanywhere.com/removefile', {
+        <FeatherIcon onClick={()=>{fetch('https://akankshasharmamain.pythonanywhere.com/removefile', {
                         method: 'POST',
                         headers: {
                           'Content-Type': 'application/json'
@@ -151,7 +151,7 @@ function reloadList(){
                   <div className="h-8 flex justify-end pr-5 text-center items-center bg-gray-100">
                     <span className={`${enable} mr-1.5`}><input placeholder={`Enter ${inputType.charAt(0).toUpperCase() + inputType.slice(1)} name`} value={name} onChange={handleNameChange} className="block w-full md:h-6 h-6 border-0 text-gray-900 shadow-sm px-1.5 ring-1 ring-inset ring-gray-300 focus:border-none placeholder:text-gray-400 ml-1 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                     </span><span className={enable} onClick={() => {if(inputType=="file" && name!="" || " "){
-                      fetch('http://akankshasharmamain.pythonanywhere.com/createfile', {
+                      fetch('https://akankshasharmamain.pythonanywhere.com/createfile', {
                         method: 'POST',
                         headers: {
                           'Content-Type': 'application/json'
@@ -162,7 +162,7 @@ function reloadList(){
                           "filecontent": ''
                         }),
                       })} else if(inputType=="folder" && name!="" || " ") {
-                        fetch('http://akankshasharmamain.pythonanywhere.com/createdir', {
+                        fetch('https://akankshasharmamain.pythonanywhere.com/createdir', {
                         method: 'POST',
                         headers: {
                           'Content-Type': 'application/json'
