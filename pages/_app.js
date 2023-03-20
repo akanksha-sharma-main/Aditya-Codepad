@@ -16,7 +16,7 @@ export default function MyApp(props) {
   const cancelButtonRef = useRef(null)
   const [removefilelocation, setRemoveFileLocation] = useState("")
   const [removedirlocation, setRemoveDirLocation] = useState("")
-  const [createfile, setcreatefile] = useState({ username: null, directory: null, filename: null })
+  const [createfile, setcreatefile] = useState({})
   const [deleteType, setdeleteType] = useState("file")
   const [createfilename, setcreatefilename] = useState('')
   const router = useRouter()
@@ -116,7 +116,7 @@ export default function MyApp(props) {
             await setOpen(true);
           }} icon="trash-2" className={`absolute z-50 mt-1 right-7 cursor-pointer text-red-400 hover:text-red-500`} width="15px" />
           <FeatherIcon onClick={async () => {
-            await setcreatefile({ username: "tutorials", directory: directoryOrFile.directoryname })
+            await setcreatefile({ "username": "tutorials", "directory": directoryOrFile.directoryname })
             await setCreate(true)
           }} icon="file-plus" className={`absolute z-50 mt-1 right-11 cursor-pointer text-gray-400 hover:text-gray-500`} width="15px" />
           <a onClick={() => { handleShowMoreClick(index); }} className="nav-link nav-item-toggle">{directoryOrFile.directoryname}</a>
