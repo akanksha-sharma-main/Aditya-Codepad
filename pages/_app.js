@@ -57,7 +57,7 @@ export default function MyApp(props) {
   const [mykey, setMyKey] = useState(Math.random())
   const fetchData = (path) => {
     loadhalf();
-    axios.post(`https://akankshasharmamain.pythonanywhere.com/file?path=${path}`)
+    axios.post(`http://localhost:3001/file?path=${path}`)
       .then(async (response) => {
         await setData(response.data.content);
         await loadfull();
@@ -68,19 +68,19 @@ export default function MyApp(props) {
   }
 
   function reloadList() {
-    fetch('https://akankshasharmamain.pythonanywhere.com/generate')
+    fetch('http://localhost:3001/generate')
       .then(response => response.json())
       .then(data => { setDirectoriesAndFiles(data.directoriesAndFile); })
-    fetch('https://akankshasharmamain.pythonanywhere.com/dirfiles')
+    fetch('http://localhost:3001/dirfiles')
       .then(response => response.json())
       .then(data => { setfiles(data); setlistKey(Math.random()) })
   }
   useEffect(() => {
     fetchData(filePath)
-    fetch('https://akankshasharmamain.pythonanywhere.com/generate')
+    fetch('http://localhost:3001/generate')
       .then(response => response.json())
       .then(data => { setDirectoriesAndFiles(data.directoriesAndFile); })
-    fetch('https://akankshasharmamain.pythonanywhere.com/dirfiles')
+    fetch('http://localhost:3001/dirfiles')
       .then(response => response.json())
       .then(data => { setfiles(data) })
   }, [])
@@ -206,7 +206,7 @@ export default function MyApp(props) {
                     className="inline-flex w-full justify-center rounded-md px-3 py-2 text-sm font-semibold text-white shadow-sm sm:ml-3 sm:w-auto"
                     onClick={async () => {
                       await setcreatefile()
-                      await fetch('https://akankshasharmamain.pythonanywhere.com/createdirfile', {
+                      await fetch('http://localhost:3001/createdirfile', {
                         method: 'POST',
                         headers: {
                           'Content-Type': 'application/json'
@@ -215,7 +215,7 @@ export default function MyApp(props) {
                           "username": createfile.username, "directory": createfile.directory, "filename": createfilename , "filecontent": ""
                         }),
                       })
-                      await setCreate(false)
+                      await setOpen(false)
                       await reloadList()
                     }}
                   >
@@ -286,7 +286,7 @@ export default function MyApp(props) {
                       className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
                       onClick={async () => {
                         if (deleteType === "file") {
-                          await fetch('https://akankshasharmamain.pythonanywhere.com/removefile', {
+                          await fetch('http://localhost:3001/removefile', {
                             method: 'POST',
                             headers: {
                               'Content-Type': 'application/json'
@@ -300,7 +300,7 @@ export default function MyApp(props) {
                           await reloadList()
                         }
                         else if (deleteType === "directory") {
-                          await fetch('https://akankshasharmamain.pythonanywhere.com/removedir', {
+                          await fetch('http://localhost:3001/removedir', {
                             method: 'POST',
                             headers: {
                               'Content-Type': 'application/json'
@@ -353,7 +353,7 @@ export default function MyApp(props) {
                 </span><span className={enable} onClick={async () => {
                   if (name != "" || " ") {
                     if (inputType == "file") {
-                      await fetch('https://akankshasharmamain.pythonanywhere.com/createfile', {
+                      await fetch('http://localhost:3001/createfile', {
                         method: 'POST',
                         headers: {
                           'Content-Type': 'application/json'
@@ -365,7 +365,7 @@ export default function MyApp(props) {
                         }),
                       }); await setName("")
                     } else if (inputType == "folder") {
-                      await fetch('https://akankshasharmamain.pythonanywhere.com/createdir', {
+                      await fetch('http://localhost:3001/createdir', {
                         method: 'POST',
                         headers: {
                           'Content-Type': 'application/json'
@@ -423,11 +423,6 @@ export default function MyApp(props) {
             </div>
           </div>
           <Component data={data} key={mykey} {...pageProps} />
-        </main>
-      </div>
-    </>
-  );
-}} {...pageProps} />
         </main>
       </div>
     </>
