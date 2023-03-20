@@ -197,7 +197,7 @@ export default function MyApp(props) {
                         <input value={createfilename} onChange={handleFileNameChange} className="block rounded-lg h-8 w-full border-0 text-gray-900 shadow-sm px-1.5 ring-1 ring-inset ring-gray-300 focus:border-none placeholder:text-gray-400 ml-1 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-base sm:leading-6" />
                       </Dialog.Title>
                       <div className="mt-2">
-                <textarea value={filecontent} onChange={handleContentChange} id="about" name="about" rows="3" class="mt-1 block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6" placeholder="you@example.com"></textarea>
+                <textarea value={fileContent} onChange={handleContentChange} id="about" name="about" rows="3" class="mt-1 block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6" placeholder="you@example.com"></textarea>
               </div>
                       <div className="mt-2">
                         <p className="text-sm text-gray-500">
