@@ -57,7 +57,7 @@ export default function MyApp(props) {
   const [mykey, setMyKey] = useState(Math.random())
   const fetchData = (path) => {
     loadhalf();
-    axios.post(`http://localhost:3001/file?path=${path}`)
+    axios.post(`https://akankshasharmamain.pythonanywhere.com/file?path=${path}`)
       .then(async (response) => {
         await setData(response.data.content);
         await loadfull();
@@ -68,19 +68,19 @@ export default function MyApp(props) {
   }
 
   function reloadList() {
-    fetch('http://localhost:3001/generate')
+    fetch('https://akankshasharmamain.pythonanywhere.com/generate')
       .then(response => response.json())
       .then(data => { setDirectoriesAndFiles(data.directoriesAndFile); })
-    fetch('http://localhost:3001/dirfiles')
+    fetch('https://akankshasharmamain.pythonanywhere.com/dirfiles')
       .then(response => response.json())
       .then(data => { setfiles(data); setlistKey(Math.random()) })
   }
   useEffect(() => {
     fetchData(filePath)
-    fetch('http://localhost:3001/generate')
+    fetch('https://akankshasharmamain.pythonanywhere.com/generate')
       .then(response => response.json())
       .then(data => { setDirectoriesAndFiles(data.directoriesAndFile); })
-    fetch('http://localhost:3001/dirfiles')
+    fetch('https://akankshasharmamain.pythonanywhere.com/dirfiles')
       .then(response => response.json())
       .then(data => { setfiles(data) })
   }, [])
@@ -206,7 +206,7 @@ export default function MyApp(props) {
                     className="inline-flex w-full justify-center rounded-md px-3 py-2 text-sm font-semibold text-white shadow-sm sm:ml-3 sm:w-auto"
                     onClick={async () => {
                       await setcreatefile()
-                      await fetch('http://localhost:3001/createdirfile', {
+                      await fetch('https://akankshasharmamain.pythonanywhere.com/createdirfile', {
                         method: 'POST',
                         headers: {
                           'Content-Type': 'application/json'
@@ -286,7 +286,7 @@ export default function MyApp(props) {
                       className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
                       onClick={async () => {
                         if (deleteType === "file") {
-                          await fetch('http://localhost:3001/removefile', {
+                          await fetch('https://akankshasharmamain.pythonanywhere.com/removefile', {
                             method: 'POST',
                             headers: {
                               'Content-Type': 'application/json'
@@ -300,7 +300,7 @@ export default function MyApp(props) {
                           await reloadList()
                         }
                         else if (deleteType === "directory") {
-                          await fetch('http://localhost:3001/removedir', {
+                          await fetch('https://akankshasharmamain.pythonanywhere.com/removedir', {
                             method: 'POST',
                             headers: {
                               'Content-Type': 'application/json'
@@ -353,7 +353,7 @@ export default function MyApp(props) {
                 </span><span className={enable} onClick={async () => {
                   if (name != "" || " ") {
                     if (inputType == "file") {
-                      await fetch('http://localhost:3001/createfile', {
+                      await fetch('https://akankshasharmamain.pythonanywhere.com/createfile', {
                         method: 'POST',
                         headers: {
                           'Content-Type': 'application/json'
@@ -365,7 +365,7 @@ export default function MyApp(props) {
                         }),
                       }); await setName("")
                     } else if (inputType == "folder") {
-                      await fetch('http://localhost:3001/createdir', {
+                      await fetch('https://akankshasharmamain.pythonanywhere.com/createdir', {
                         method: 'POST',
                         headers: {
                           'Content-Type': 'application/json'
