@@ -215,7 +215,7 @@ export default function MyApp(props) {
                           "username": createfile.username, "directory": createfile.directory, "filename": createfilename , "filecontent": ""
                         }),
                       })
-                      await setOpen(false)
+                      await setCreate(false)
                       await reloadList()
                     }}
                   >
